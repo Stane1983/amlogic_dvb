@@ -1,7 +1,7 @@
 
 obj-m += aml.o aml_fe_avl62x1_av201x.o aml_fe_avl68x2_r848.o r848a.o
 
-aml-objs=aml/aml_dvb.o aml/aml_dmx.o
+aml-objs=aml_dvb.o aml_dmx.o
 
 #EXTRA_CFLAGS += -D_AVL_LINUX_DVB_
 EXTRA_CFLAGS += -I. 
