@@ -17,6 +17,7 @@
 
 #ifndef STREAMBUF_H
 #define STREAMBUF_H
+#include "amports_config.h"
 
 #define BUF_FLAG_ALLOC          0x01
 #define BUF_FLAG_IN_USE         0x02
