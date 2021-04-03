@@ -42,7 +42,7 @@
 /*#include <mach/mod_gate.h>*/
 #include <linux/gpio.h>
 #include <linux/spinlock.h>
-#include <linux/amlogic/amdsc.h>
+#include "amdsc.h"
 #include <linux/string.h>
 #include <linux/pinctrl/consumer.h>
 
