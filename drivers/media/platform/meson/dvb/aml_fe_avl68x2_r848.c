@@ -134,7 +134,7 @@ static int avl68x2_fe_init(struct aml_dvb *advb,
 	pr_dbg("i2c_adap_id=%d\n", i2c_adap_id);
 
 	gpio_reset = -1;
-	desc = of_get_named_gpiod_flags(pdev->dev.of_node,
+	desc = of_get_named_gpio_flags(pdev->dev.of_node,
 					"dtv_demod0_reset_gpio-gpios",
 					0,
 					NULL);
@@ -146,7 +146,7 @@ static int avl68x2_fe_init(struct aml_dvb *advb,
 	pr_dbg("gpio_reset=%d\n", e2_pub.gpio_fec_reset);
 
 	gpio_power = -1;
-	desc = of_get_named_gpiod_flags(pdev->dev.of_node,
+	desc = of_get_named_gpio_flags(pdev->dev.of_node,
 					"dtv_demod0_power_gpio-gpios",
 					0,
 					NULL);
@@ -187,7 +187,7 @@ static int avl68x2_fe_init(struct aml_dvb *advb,
 	
 
 	e2_pub.gpio_lock_led = -1;
-	desc = of_get_named_gpiod_flags(pdev->dev.of_node,
+	desc = of_get_named_gpio_flags(pdev->dev.of_node,
 					"dtv_demod0_lock_gpio-gpios",
 					0,NULL);
 	if (!PTR_ERR_OR_ZERO(desc))
@@ -343,7 +343,7 @@ static int avl68x2_fe_init(struct aml_dvb *advb,
 	}
 
 	pr_inf("Frontend AVL68x2 registered!\n");
-	dmx_reset_dmx_hw(-1);
+	dmx_reset_dmx_hw(advb, -1);
 
 	return 0;
 

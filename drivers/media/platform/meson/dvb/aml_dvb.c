@@ -35,7 +35,7 @@
 #include <linux/poll.h>
 #include <linux/delay.h>
 #include <linux/platform_device.h>
-#include <linux/amlogic/amports/amstream.h>
+#include <linux/amlogic/media/utils/amstream.h>
 #include "c_stb_define.h"
 #include "c_stb_regs_define.h"
 
@@ -48,7 +48,7 @@
 
 #include <linux/reset.h>
 
-#include "linux/amlogic/cpu_version.h"
+#include <linux/amlogic/cpu_version.h>
 
 #include "aml_dvb.h"
 #include "aml_dvb_reg.h"
@@ -80,19 +80,17 @@ static struct class   aml_stb_class;
 static int control_ts_on_csi_port(int tsin, int enable)
 {
 //#if MESON_CPU_TYPE >= MESON_CPU_TYPE_MESON8
-	if (is_meson_m8_cpu() || is_meson_m8b_cpu() || is_meson_m8m2_cpu()) {
-		unsigned int temp_data;
-		if(tsin == 2 && enable) {
-			//TS2 is on CSI port.
-			//power on mipi csi phy
-			pr_error("power on mipi csi phy for TSIN2\n");
-			WRITE_CBUS_REG(HHI_CSI_PHY_CNTL0,0xfdc1ff81);
-			WRITE_CBUS_REG(HHI_CSI_PHY_CNTL1,0x3fffff);
-			temp_data = READ_CBUS_REG(HHI_CSI_PHY_CNTL2);
-			temp_data &= 0x7ff00000;
-			temp_data |= 0x80000fc0;
-			WRITE_CBUS_REG(HHI_CSI_PHY_CNTL2,temp_data);
-		}
+	unsigned int temp_data;
+	if(tsin == 2 && enable) {
+		//TS2 is on CSI port.
+		//power on mipi csi phy
+		pr_error("power on mipi csi phy for TSIN2\n");
+		WRITE_CBUS_REG(HHI_CSI_PHY_CNTL0,0xfdc1ff81);
+		WRITE_CBUS_REG(HHI_CSI_PHY_CNTL1,0x3fffff);
+		temp_data = READ_CBUS_REG(HHI_CSI_PHY_CNTL2);
+		temp_data &= 0x7ff00000;
+		temp_data |= 0x80000fc0;
+		WRITE_CBUS_REG(HHI_CSI_PHY_CNTL2,temp_data);
 	}
 //#endif
 	return 0;

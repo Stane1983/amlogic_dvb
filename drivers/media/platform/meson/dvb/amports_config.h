@@ -68,11 +68,10 @@ except g9tv,mtvd,m8b.
 */
 static inline bool has_Vpu_prot(void)
 {
-	if (is_meson_g9tv_cpu() || is_meson_mtvd_cpu() || is_meson_m8b_cpu())
+	if (get_cpu_type() == MESON_CPU_MAJOR_ID_M8B)
 		return 0;
-	else if (get_cpu_type() >= MESON_CPU_MAJOR_ID_M8)
+	else
 		return 1;
-	return 0;
 }
 
 /*
@@ -81,7 +80,7 @@ others all don't have it.
 */
 static inline bool has_vdec2(void)
 {
-	if (is_meson_mtvd_cpu() || is_meson_m8_cpu())
+	if (get_cpu_type() > MESON_CPU_MAJOR_ID_M8B)
 		return 1;
 	return 0;
 }
@@ -91,17 +90,13 @@ static inline bool has_hevc_vdec(void)
 #ifndef CONFIG_AM_VDEC_H265
 	return 0;
 #endif
-	/*only tvd not have hevc,when later than m8 */
-	if (is_meson_mtvd_cpu())
-		return 0;
-	else if (get_cpu_type() > MESON_CPU_MAJOR_ID_M8)
-		return 1;
-	return 0;
+
+	return 1;
 }
 
 static inline bool has_hdec(void)
 {
-	if (get_cpu_type() >= MESON_CPU_MAJOR_ID_M8)
+	if (get_cpu_type() > MESON_CPU_MAJOR_ID_M8B)
 		return 1;
 	return 0;
 }
