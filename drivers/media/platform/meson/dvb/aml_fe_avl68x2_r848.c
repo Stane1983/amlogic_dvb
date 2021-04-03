@@ -91,6 +91,8 @@ int avl68x2_power(void)
 	return 0;
 }
 
+extern void dmx_reset_dmx_sw(int num);
+
 static int avl68x2_fe_init(struct aml_dvb *advb,
 			   struct platform_device *pdev,
 			   struct aml_fe *fe,
@@ -343,7 +345,7 @@ static int avl68x2_fe_init(struct aml_dvb *advb,
 	}
 
 	pr_inf("Frontend AVL68x2 registered!\n");
-	dmx_reset_dmx_hw(advb, -1);
+	dmx_reset_dmx_sw(-1);
 
 	return 0;
 
